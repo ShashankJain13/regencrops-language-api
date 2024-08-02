@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}
+  labels:
+    {{- include "helm-charts.labels" . | nindent 4}}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "helm-charts.selectorLabels" . | nindent 6}}
+  template:
+    metadata:
+      labels:
+        {{- include "helm-charts.labels" . | nindent 8}}
+    spec:
+      containers:
+      - name: {{ .Values.container.name}}
+        image: {{ .Values.container.image}}
+        
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.service.targetPort}}

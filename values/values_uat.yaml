@@ -1,0 +1,18 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+service:
+  type: NodePort
+  port: 80
+  name: regencrops-api-lang-service
+  targetPort: 3000
+
+container:
+  name: regencorp-api-lang
+  image: 058264546862.dkr.ecr.ap-south-1.amazonaws.com/regencrops-uat-language-api:latest
+  #DATABASE_URL: postgresql://regencrops_rw_user:RegencropsRW!01@regencrops-pgs-dev.regencrops.com:5432/AgriSolutions?schema=master
